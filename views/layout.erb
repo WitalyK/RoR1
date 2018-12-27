@@ -7,14 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/vendor/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <script src="/vendor/jquery.js"></script>
-    <script src="/vendor/bootstrap.min.js"></script>
-    <script src="jquery.simplecolorpicker.js"></script>
-    <link rel="stylesheet" href="jquery.simplecolorpicker.js">
-    <script src="jquery.datetimepicker.js"></script>
-    <link rel="stylesheet" href="jquery.datetimepicker.js">
-  </head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>    
+ </head>
   <body>
 		<div class="container">
 
@@ -37,7 +33,7 @@
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<%=username%>
+								
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="/login/form">Login</a>
@@ -50,7 +46,7 @@
 			</nav>
 
 			<div>
-				<%if @error then %>
+				<%if @error && @error.length > 0 then %>
 						<div class="alert alert-error"><%=@error%></div>
 				<% end %>
 				<%= yield %>

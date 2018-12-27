@@ -1,15 +1,10 @@
 <head>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.js"></script>
 <script src="jquery.simplecolorpicker.js"></script>
-
 <link rel="stylesheet" href="jquery.simplecolorpicker.css">
 
-<script type="text/javascript">
-    $(function(){
-        $('#color').simplecolorpicker();
-        $('#datetimepicker').datetimepicker();
-    });
-</script>
+
 </head>
 
 <body>
@@ -30,13 +25,14 @@
   <div class="form-group">
     <label>Ваш парикмахер:</label>
     <select name="barber" class="form-control">
-      <option <%= @barber == 'dgds' ? 'selected': '' %>>dgds</option>
-      <option <%= @barber == 'dfdsds' ? 'selected': '' %>>dfds</option>
-      <option <%= @barber == 'dgds' ? 'selected': '' %>>dgds</option>
+      <% @barbers.each do |item| %>
+          <option <%= @barber == item['name'] ? 'selected' : '' %>><%= item['name'] %></option>
+      <% end %>
     </select>
+    
   </div>
   <div class="form-group">
-    <select id="color" name="color">
+    <select id="color1" name="colorpicker-notheme">
       <option value="#7bd148">Green</option>
       <option value="#5484ed">Bold blue</option>
       <option value="#a4bdfc">Blue</option>
@@ -51,6 +47,78 @@
       <option value="#e1e1e1">Gray</option>
     </select>
   </div>
+<script>
+$(document).ready(function() {
+  $('select[name="colorpicker-change-background-color"]').on('change', function() {
+    $(document.body).css('background-color', $('select[name="colorpicker-change-background-color"]').val());
+  });
 
+  setTimeout(function() {
+    $('select[name="colorpicker-selectColor-#fbd75b"]').simplecolorpicker('selectColor', '#fbd75b');
+  }, 5000);
+
+  setTimeout(function() {
+    $('select[name="colorpicker-selectColor-#FBD75B"]').simplecolorpicker('selectColor', '#FBD75B');
+  }, 5000);
+
+  setTimeout(function() {
+    $('select[name="colorpicker-selectColor-#fbd75b-multiple"]').simplecolorpicker('selectColor', '#fbd75b');
+  }, 5000);
+
+  setTimeout(function() {
+    // Generates a JavaScript error
+    $('select[name="colorpicker-selectColor-unknown"]').simplecolorpicker('selectColor', 'unknown');
+  }, 5000);
+
+
+  setTimeout(function() {
+    $('select[name="colorpicker-picker-selectColor-#fbd75b"]').simplecolorpicker('selectColor', '#fbd75b');
+  }, 5000);
+
+  setTimeout(function() {
+    // Generates a JavaScript error
+    $('select[name="colorpicker-picker-selectColor-unknown"]').simplecolorpicker('selectColor', 'unknown');
+  }, 5000);
+ 
+
+  $('#init').on('click', function() {
+    $('select[name="colorpicker-shortlist"]').simplecolorpicker();
+    $('select[name="colorpicker-longlist"]').simplecolorpicker();
+    $('select[name="colorpicker-notheme"]').simplecolorpicker();
+    $('select[name="colorpicker-regularfont"]').simplecolorpicker({theme: 'regularfont'});
+    $('select[name="colorpicker-glyphicons"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="colorpicker-fontawesome"]').simplecolorpicker({theme: 'fontawesome'});
+    $('select[name="colorpicker-bootstrap3-form"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="colorpicker-modal-inline"]').simplecolorpicker();
+    $('select[name="colorpicker-modal-picker"]').simplecolorpicker({picker: true});
+    $('select[name="colorpicker-option-selected"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="colorpicker-options-disabled"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="colorpicker-option-selected-disabled"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="colorpicker-optgroups"]').simplecolorpicker();
+    $('select[name="colorpicker-change-background-color"]').simplecolorpicker();
+    $('select[name="colorpicker-selectColor-#fbd75b"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="colorpicker-selectColor-#FBD75B"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="colorpicker-selectColor-#fbd75b-multiple"]').simplecolorpicker({theme: 'glyphicons'});
+    $('select[name="colorpicker-selectColor-unknown"]').simplecolorpicker({theme: 'glyphicons'});
+
+    $('select[name="colorpicker-picker-shortlist"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
+    $('select[name="colorpicker-picker-longlist"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
+    $('select[name="colorpicker-picker-delay"]').simplecolorpicker({picker: true, theme: 'glyphicons', pickerDelay: 1000});
+    $('select[name="colorpicker-picker-option-selected"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
+    $('select[name="colorpicker-picker-options-disabled"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
+    $('select[name="colorpicker-picker-option-selected-disabled"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
+    $('select[name="colorpicker-picker-optgroups"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
+    $('select[name="colorpicker-picker-selectColor-#fbd75b"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
+    $('select[name="colorpicker-picker-selectColor-unknown"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
+  });
+
+  $('#destroy').on('click', function() {
+    $('select').simplecolorpicker('destroy');
+  });
+
+  // By default, activate simplecolorpicker plugin on HTML selects
+  $('#init').trigger('click');
+});
+</script>
 </form>
 </body>
