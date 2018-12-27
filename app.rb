@@ -3,12 +3,12 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
-#def get_db
-#  return SQlite3::Database.new 'barbershop.sqlite'
-#end
+def get_db
+  return SQLite3::Database.new 'barbershop.db'
+end
 
 configure do 
-  db = SQLite3::Database.new 'barbershop.sqlite'
+  db = get_db 
   db.execute 'create table if not exist
               "Users" 
               (
@@ -24,7 +24,7 @@ end
 get '/' do
 
   erb 'Hello!'
-end
+end 
 
 get '/about' do
 	erb :about
